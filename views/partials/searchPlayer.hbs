@@ -1,0 +1,37 @@
+{{#if availabelTournaments}}
+    <form id="search" class="container" action="/tournaments/{{nick}}/availabelTournaments" method="POST" style="margin-top: 10px">
+{{else}}
+    <form id="search" class="container" action="/tournaments/{{nick}}" method="POST" style="margin-top: 10px">
+{{/if}}
+
+    <div class="search-wrapper row">
+        <div class="col s8">
+            <input placeholder="{{searchPlaceholder}}" autocomplete="off" name="search" value="{{searchValue}}">
+        </div>
+        <div class="col s2">
+            <button class="btn-large">Шукати</button>
+        </div>
+        <div class="col s2" style="padding-top: 17px">
+            <label>
+                {{#if availabelTournaments}}
+                    <input type="checkbox" class="filled-in" id="tournamentsPossible" checked/>
+                {{else}}
+                    <input type="checkbox" class="filled-in" id="tournamentsPossible"/>
+                {{/if}}
+                <span>Турніри для участі</span>
+            </label>
+        </div>
+    </div>
+</form>
+
+<script>
+    const checkBox = document.getElementById('tournamentsPossible')
+
+    checkBox.addEventListener('click', () => {
+        if (checkBox.checked) {
+            location.href = '/tournaments/{{nick}}/availabelTournaments'
+        } else {
+            location.href = '/tournaments/{{nick}}'
+        }
+    })
+</script>

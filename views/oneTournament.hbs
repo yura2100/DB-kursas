@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>Турнір: {{tournament.name}}</h2>
+    <h5>Дата: {{tournament.date}}</h5>
+    <h5>Опис: {{tournament.description}}</h5>
+    <h5>Статус: {{status}}</h5>
+
+    {{#if timeToStart}}
+        <h5>До початку: {{timeToStart}}</h5>
+    {{/if}}
+    <div class="row">
+        <div class="col s4">
+            <a href="/admin/tournaments/report/{{tournament.tournamentId}}" class="btn-large">Звіт з реєстраціями
+                (PDF)</a>
+        </div>
+
+        {{#if canRegister}}
+            <div class="col s4">
+                <a href="/registerOnTournament/{{nick}}/{{tournament.tournamentId}}"
+                   class="btn-large">Зареєструватись</a>
+            </div>
+        {{/if}}
+
+        {{#if canDeleteRegister}}
+            <div class="col s4">
+                <a href="/tournaments/deleteRegister/{{nick}}/{{tournament.tournamentId}}" class="btn-large">Скасувати
+                    реєстрацію</a>
+            </div>
+        {{/if}}
+    </div>
+    <h3 class="center-align">Гравці</h3>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Нік</th>
+            <th>Ім'я</th>
+            <th>Прізвище</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each players}}
+            <tr onclick="location.href='/tournaments/{{../nick}}/registration/{{../tournament.tournamentId}}/{{this.nick}}'">
+                <td>{{this.nick}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.surname}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

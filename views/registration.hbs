@@ -1,0 +1,22 @@
+<div class="container">
+    <h3>Реєстрація гравця <a href="/player/{{nick}}/showOther/{{nickRegistered}}">{{nickRegistered}}</a></h3>
+    <h3>на турнір <a href="/tournaments/{{nick}}/show/{{tournament.tournamentId}}">{{tournament.name}}</a></h3>
+    <h3 class="center-align">Колоди</h3>
+    <div class="row">
+        {{#each decks}}
+            <div class="col s4">
+                <h6><strong>Назва: </strong>{{this.name}}</h6>
+                <h6><strong>Клас: </strong>{{this.class}}</h6>
+                <table>
+                    <tbody>
+                    {{#each this.cards}}
+                        <tr>
+                            <td>{{this}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{/each}}
+    </div>
+</div>

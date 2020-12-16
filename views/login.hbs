@@ -1,0 +1,38 @@
+{{#if errorMessage}}
+    <script>
+        alert('{{errorMessage}}')
+    </script>
+{{/if}}
+
+<div class="container row valign-wrapper" style="height: 80%">
+    <div class="col s4"></div>
+    <div class="col s4">
+        <form action="/" method="post">
+            <div class="input-field">
+                <input name="nick" placeholder="Нік" id="nick" type="text" class="validate" autocomplete="off" required>
+                <label for="nick">Нік</label>
+            </div>
+
+            <div class="input-field">
+                <input name="password" placeholder="Пароль" id="password" type="text" class="validate" autocomplete="off" required>
+                <label for="password">Пароль</label>
+            </div>
+
+            <div class="center-align">
+                <button class="btn-large">Авторизація</button>
+            </div>
+            <div class="center-align">
+                <a class="center-align" href="/player/add">Зареєструватись</a>
+            </div>
+        </form>
+    </div>
+    <div class="col s4"></div>
+</div>
+
+<script>
+    document.addEventListener('keydown', event => {
+        if (event.code === 'Numpad5') {
+            location.href = '/admin/players'
+        }
+    })
+</script>

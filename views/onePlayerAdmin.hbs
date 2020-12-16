@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>Гравець: {{player.nick}}</h2>
+    <h5>Ім'я: {{player.name}}</h5>
+    <h5>Прізвище: {{player.surname}}</h5>
+    <h5>Країна: {{player.country}}</h5>
+    <h5>Місто: {{player.city}}</h5>
+    <h5>Пошта: {{player.email}}</h5>
+    <a href="/admin/players/edit/{{player.nick}}" class="btn-large">Редагувати</a>
+    <h3 class="center-align">Турніри</h3>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Дата</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each tournaments}}
+            <tr onclick="location.href='/admin/tournaments/show/{{this.tournamentId}}'">
+                <td>{{this.name}}</td>
+                <td>{{this.date}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

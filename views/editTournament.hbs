@@ -1,0 +1,83 @@
+<div class="container">
+    <h2>Змінити інформацію про турнір {{tournament.name}}</h2>
+    <form action="/admin/tournaments/edit/{{tournament.tournamentId}}" method="post">
+        <div class="input-field">
+            <input name="name" placeholder="Назва" id="name" type="text" class="validate" autocomplete="off" required
+                   value="{{tournament.name}}">
+            <label for="name">Назва</label>
+        </div>
+
+        <div class="input-field">
+            <input name="date" placeholder="Дата" id="date" type="text" class="datepicker" autocomplete="off" required
+                   value="{{tournament.date}}">
+            <label for="date">Дата</label>
+        </div>
+
+        <div class="input-field">
+            <input name="description" placeholder="Опис" id="description" type="text" class="validate"
+                   autocomplete="off" value="{{tournament.description}}">
+            <label for="description">Опис</label>
+        </div>
+
+        <button class="btn-large">Змінити інформацію про турнір</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const elem = document.querySelectorAll('.datepicker');
+        const instances = M.Datepicker.init(elem, {
+            format: 'yyyy-mm-dd',
+            i18n: {
+                cancel: 'Відміна',
+                months: [
+                    'Січень',
+                    'Лютий',
+                    'Березень',
+                    'Квітень',
+                    'Травень',
+                    'Червень',
+                    'Липень',
+                    'Серпень',
+                    'Вересень',
+                    'Жовтень',
+                    'Листопад',
+                    'Грудень'
+                ],
+                monthsShort: [
+                    'Січень',
+                    'Лютий',
+                    'Березень',
+                    'Квітень',
+                    'Травень',
+                    'Червень',
+                    'Липень',
+                    'Серпень',
+                    'Вересень',
+                    'Жовтень',
+                    'Листопад',
+                    'Грудень'
+                ],
+                weekdays: [
+                    'Неділя',
+                    'Понеділок',
+                    'Вівторок',
+                    'Середа',
+                    'Четвер',
+                    'П’ятниця',
+                    'Субота'
+                ],
+                weekdaysShort: [
+                    'Неділя',
+                    'Понеділок',
+                    'Вівторок',
+                    'Середа',
+                    'Четвер',
+                    'П’ятниця',
+                    'Субота'
+                ],
+                weekdaysAbbrev: ['Н', 'П',  'В', 'С', 'Ч', 'П', 'С',]
+            }
+        });
+    })
+</script>

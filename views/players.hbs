@@ -1,0 +1,78 @@
+{{>search}}
+
+<form id="sort" action="#" style="position: absolute; left: 20px;">
+    <h5>Сортувати за:</h5>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="nick" onclick="location.href=`/admin/players/sort/${this.value}/${this.name}` "/>
+            <span>Ніком</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="name" onclick="location.href=`/admin/players/sort/${this.value}/${this.name}` "/>
+            <span>Ім'ям</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="surname" onclick="location.href=`/admin/players/sort/${this.value}/${this.name}` "/>
+            <span>Прізвищем</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="country" onclick="location.href=`/admin/players/sort/${this.value}/${this.name}` "/>
+            <span>Країною</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="city" onclick="location.href=`/admin/players/sort/${this.value}/${this.name}` "/>
+            <span>Містом</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="email" onclick="location.href=`/admin/players/sort/${this.value}/${this.name}` "/>
+            <span>Поштою</span>
+        </label>
+    </p>
+</form>
+
+<script>
+    const orderedBy = "{{orderedBy}}"
+
+    if (orderedBy)
+        document.querySelector(`input[value="${orderedBy}"]`).setAttribute('checked', '')
+    else
+        document.querySelector(`input[value="nick"]`).setAttribute('checked', '')
+</script>
+
+<table class="container highlight">
+    <thead>
+    <tr>
+        <th>Нік</th>
+        <th>Ім'я</th>
+        <th>Прізвище</th>
+        <th>Країна</th>
+        <th>Місто</th>
+        <th>Пошта</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{#each players}}
+        <tr onclick="location.href='/admin/players/show/{{this.nick}}'">
+            <td>{{this.nick}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.surname}}</td>
+            <td>{{this.country}}</td>
+            <td>{{this.city}}</td>
+            <td>{{this.email}}</td>
+            <td><a href="/admin/players/edit/{{this.nick}}">Редагувати</a></td>
+            <td><a href="/admin/players/delete/{{this.nick}}">Видалити</a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

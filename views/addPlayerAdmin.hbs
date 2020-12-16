@@ -1,0 +1,32 @@
+<div class="container">
+    {{#if errorMessage}}
+        <script>
+            alert('{{errorMessage}}')
+        </script>
+    {{/if}}
+
+    <h2>Додати нового гравця</h2>
+    <form action="/admin/players/add" method="post">
+        <div class="input-field">
+            <input name="nick" placeholder="Нік" id="nick" type="text" class="validate" autocomplete="off" required>
+            <label for="nick">Нік</label>
+        </div>
+
+        <div class="input-field">
+            <input name="name" placeholder="Ім'я" id="name" type="text" class="validate" autocomplete="off" required>
+            <label for="name">Ім'я</label>
+        </div>
+
+        <div class="input-field">
+            <input name="surname" placeholder="Прізвище" id="surname" type="text" class="validate" autocomplete="off" required>
+            <label for="surname">Прізвище</label>
+        </div>
+
+        <div class="input-field">
+            <input name="password" placeholder="Пароль" id="password" type="text" class="validate" autocomplete="off" required>
+            <label for="password">Пароль</label>
+        </div>
+
+        <button class="btn-large">Додати нового граця</button>
+    </form>
+</div>

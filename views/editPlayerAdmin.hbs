@@ -1,0 +1,41 @@
+<div class="container">
+    <h2>Змінити інформацію про гравця {{player.nick}}</h2>
+    <form action="/admin/players/edit" method="post">
+        <div class="input-field">
+            <input name="nick" placeholder="Нік" id="nick" type="text" class="validate" autocomplete="off" required readonly value="{{player.nick}}">
+            <label for="nick">Нік</label>
+        </div>
+
+        <div class="input-field">
+            <input name="name" placeholder="Ім'я" id="name" type="text" class="validate" autocomplete="off" required value="{{player.name}}">
+            <label for="name">Ім'я</label>
+        </div>
+
+        <div class="input-field">
+            <input name="surname" placeholder="Прізвище" id="surname" type="text" class="validate" autocomplete="off" value="{{player.surname}}">
+            <label for="surname">Прізвище</label>
+        </div>
+
+        <div class="input-field">
+            <input name="country" placeholder="Країна" id="country" type="text" class="validate" autocomplete="off" value="{{player.country}}">
+            <label for="country">Країна</label>
+        </div>
+
+        <div class="input-field">
+            <input name="city" placeholder="Місто" id="city" type="text" class="validate" autocomplete="off" value="{{player.city}}">
+            <label for="city">Місто</label>
+        </div>
+
+        <div class="input-field">
+            <input name="email" placeholder="Електронна пошта" id="email" type="email" class="validate" autocomplete="off" value="{{player.email}}">
+            <label for="email">Електронна пошта</label>
+        </div>
+
+        <div class="input-field">
+            <input name="password" placeholder="Пароль" id="password" type="text" class="validate" autocomplete="off" required value="{{player.password}}">
+            <label for="password">Пароль</label>
+        </div>
+
+        <button class="btn-large">Змінити інформацію про гравця</button>
+    </form>
+</div>

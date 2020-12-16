@@ -1,0 +1,64 @@
+{{>searchPlayer}}
+
+{{#if availabelTournaments}}
+    <form id="sort" action="#" style="position: absolute; left: 20px;">
+        <h5>Сортувати за:</h5>
+        <p>
+            <label>
+                <input name="{{searchValue}}" type="radio" value="name"
+                       onclick="location.href=`/tournaments/{{nick}}/availabelTournaments/sort/${this.value}/${this.name}` "/>
+                <span>Назвою</span>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input name="{{searchValue}}" type="radio" value="date"
+                       onclick="location.href=`/tournaments/{{nick}}/availabelTournaments/sort/${this.value}/${this.name}` "/>
+                <span>Датою</span>
+            </label>
+        </p>
+    </form>
+{{else}}
+    <form id="sort" action="#" style="position: absolute; left: 20px;">
+        <h5>Сортувати за:</h5>
+        <p>
+            <label>
+                <input name="{{searchValue}}" type="radio" value="name"
+                       onclick="location.href=`/tournaments/{{nick}}/sort/${this.value}/${this.name}` "/>
+                <span>Назвою</span>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input name="{{searchValue}}" type="radio" value="date"
+                       onclick="location.href=`/tournaments/{{nick}}/sort/${this.value}/${this.name}` "/>
+                <span>Датою</span>
+            </label>
+        </p>
+    </form>
+{{/if}}
+
+<script>
+    const orderedBy = "{{orderedBy}}"
+
+    if (orderedBy)
+        document.querySelector(`input[value="${orderedBy}"]`).setAttribute('checked', '')
+</script>
+
+<table class="container highlight">
+    <thead>
+    <tr>
+        <th>Назва</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{#each tournaments}}
+        <tr onclick="location.href='/tournaments/{{../nick}}/show/{{this.tournamentId}}'">
+            <td>{{this.name}}</td>
+            <td>{{this.date}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

@@ -1,0 +1,70 @@
+<div class="container">
+    <h2>Реєстрація на турнір: <a href="/tournaments/{{nick}}/show/{{tournament.tournamentId}}">{{tournament.name}}</a>
+    </h2>
+    <form action="" method="post">
+        <div class="row">
+            {{#decks}}
+                <div class="col s4">
+                    <h5>Колода {{this}}</h5>
+                    <div class="input-field">
+                        <input name="name{{this}}" placeholder="Назва" id="name{{this}}" type="text" class="validate"
+                               autocomplete="off" required>
+                        <label for="name{{this}}">Назва</label>
+                    </div>
+
+                    <div class="input-field">
+                        <select name="class{{this}}" required>
+                            <option value="" disabled selected>Оберіть клас</option>
+                            <option value="Маг">Маг</option>
+                            <option value="Мисливець">Мисливець</option>
+                            <option value="Воїн">Воїн</option>
+                            <option value="Шаман">Шаман</option>
+                            <option value="Друїд">Друїд</option>
+                            <option value="Жрець">Жрець</option>
+                            <option value="Розбійник">Розбійник</option>
+                            <option value="Паладин">Паладин</option>
+                            <option value="Чорнокнижник">Чорнокнижник</option>
+                            <option value="Воїн">Мисливець за демонами</option>
+                        </select>
+                        <label>Клас</label>
+                    </div>
+
+                    <h6 class="center-align">Карти в колоду {{this}}</h6>
+
+                    <div>
+                        {{#each ../cards}}
+                            <div class="input-field">
+                                <input name="card{{this}}_{{../this}}" placeholder="Карта {{this}}" type="text" id="autocomplete-input" class="autocomplete" autocomplete="off">
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/decks}}
+        </div>
+
+        <div class="center-align">
+            <button class="btn-large">Зареєструватися</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const elemsSelect = document.querySelectorAll('select')
+        const elemsAutocomplete = document.querySelectorAll('.autocomplete')
+
+        M.FormSelect.init(elemsSelect)
+        M.Autocomplete.init(elemsAutocomplete, {
+            data: {
+                {{#each existingCards}}
+                    '{{this}}': null,
+                {{/each}}
+            }
+        })
+
+        //Костыль, который чинит баг имени "card1_[object Object]", когда i = j (37 строка)
+        for (let i = 1; i <= 3; i++) {
+            document.getElementsByName(`card${i}_[object Object]`)[0].setAttribute('name', `card${i}_${i}`)
+        }
+    })
+</script>

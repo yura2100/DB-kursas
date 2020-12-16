@@ -1,0 +1,44 @@
+{{>search}}
+
+<form id="sort" action="#" style="position: absolute; left: 20px;">
+    <h5>Сортувати за:</h5>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="name" onclick="location.href=`/admin/tournaments/sort/${this.value}/${this.name}` "/>
+            <span>Назвою</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="{{searchValue}}" type="radio" value="date" onclick="location.href=`/admin/tournaments/sort/${this.value}/${this.name}` "/>
+            <span>Датою</span>
+        </label>
+    </p>
+</form>
+
+<script>
+    const orderedBy = "{{orderedBy}}"
+
+    if (orderedBy)
+        document.querySelector(`input[value="${orderedBy}"]`).setAttribute('checked', '')
+</script>
+
+<table class="container highlight">
+    <thead>
+    <tr>
+        <th>Назва</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{#each tournaments}}
+        <tr onclick="location.href='/admin/tournaments/show/{{this.tournamentId}}'">
+            <td>{{this.name}}</td>
+            <td>{{this.date}}</td>
+            <td><a href="/admin/tournaments/edit/{{this.tournamentId}}">Редагувати</a></td>
+            <td><a href="/admin/tournaments/delete/{{this.tournamentId}}">Видалити</a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

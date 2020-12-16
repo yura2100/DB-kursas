@@ -1,0 +1,21 @@
+<nav>
+    <div class="nav-wrapper container">
+        <div class="brand-logo">Адміністратор</div>
+        <ul id="nav" class="right hide-on-med-and-down">
+
+            {{#if isPlayer}}
+                <li class="active"><a href="/admin/players">Гравці</a></li>
+            {{else}}
+                <li><a href="/admin/players">Гравці</a></li>
+            {{/if}}
+
+            {{#if isTournament}}
+                <li class="active"><a href="/admin/tournaments">Турніри</a></li>
+            {{else}}
+                <li><a href="/admin/tournaments">Турніри</a></li>
+            {{/if}}
+
+            <li><a href="/">Вихід</a></li>
+        </ul>
+    </div>
+</nav>
