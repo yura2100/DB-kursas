@@ -3,6 +3,7 @@ const {QueryTypes} = require('sequelize')
 const {Registration} = require('../tables/registration')
 const {Round} = require('../tables/round')
 const {Tournament} = require('../tables/tournament')
+const {TournamentRelationsAdapter} = require('./tournamentRelationsAdapter')
 
 class TournamentAdapter {
     static async add(name, date) {
@@ -50,6 +51,14 @@ class TournamentAdapter {
         })
     }
 
+    static async getMaxRound(tournamentId) {
+        return await Round.max('number', {
+            where: {
+                tournamentId: tournamentId
+            }
+        })
+    }
+
     static async getStatus(tournamentId) {
         const tournament = await Tournament.findByPk(tournamentId)
         const totalPlayers = await Registration.count({
@@ -57,11 +66,7 @@ class TournamentAdapter {
                 tournamentId: tournamentId
             }
         })
-        const maxRound = await Round.max('number', {
-            where: {
-                tournamentId: tournamentId
-            }
-        })
+        const maxRound = await TournamentAdapter.getMaxRound(tournamentId)
 
         if (Date.now() < Date.parse(tournament.date))
             return 'не почався'
@@ -116,6 +121,38 @@ class TournamentAdapter {
         }
 
         return result
+    }
+
+    static async startTournament(tournamentId) {
+        if (await TournamentAdapter.getStatus(tournamentId) !== 'активний') {
+            const players = await TournamentRelationsAdapter.getTournamentsPlayers(tournamentId)
+
+            if (players.length % 2 === 0) {
+                for (let i = 0; i < players.length; i += 2) {
+                    await TournamentRelationsAdapter.addRound(tournamentId, 1, players[i].nick, players[i + 1].nick)
+                }
+            } else {
+                for (let i = 0; i < players.length - 1; i += 2) {
+                    await TournamentRelationsAdapter.addRound(tournamentId, 1, players[i].nick, players[i + 1].nick)
+                }
+
+                await TournamentRelationsAdapter.addRound(tournamentId, 1, players[players.length - 1].nick, null, players[players.length - 1].nick)
+            }
+        }
+    }
+
+    static async findAndStartTodaysTournaments() {
+        const tournaments = await sequelize.query(
+            `SELECT tournamentId
+                 FROM tournaments
+                 WHERE date = DATE_FORMAT(NOW(), '%Y-%m-%d')`, {
+                raw: true,
+                type: QueryTypes.SELECT
+            })
+
+        for (const tournament of tournaments) {
+            await TournamentAdapter.startTournament(tournament.tournamentId);
+        }
     }
 }
 

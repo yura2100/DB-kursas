@@ -1,0 +1,20 @@
+<div class="container">
+    <h2>Активні турніри</h2>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Раунд</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each tournaments}}
+            <tr onclick="location.href='/active/{{../nick}}/show/{{this.tournamentId}}/{{this.round}}'">
+                <td>{{this.name}}</td>
+                <td>{{this.round}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

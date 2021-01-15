@@ -1,0 +1,27 @@
+<div class="container" style="height: 80%">
+    {{#if canPlay}}
+        {{#if resultExists}}
+            <h2 class="center-align">Результати раунду {{round}} вже записані</h2>
+        {{else}}
+            <h2 class="center-align">Результати раунду {{round}}</h2>
+            <div class="row">
+                <div class="col s2"></div>
+                <div class="col s4 center-align">
+                    <h4>Гравець <a
+                            href="/tournaments/{{nick}}/registration/{{tournament.tournamentId}}/{{nick}}">{{nick}}</a></h4>
+                    <div class="btn-large" onclick="location.href = '/active/{{nick}}/winner/{{tournament.tournamentId}}/{{round}}/{{nick}}'">Переміг</div>
+                </div>
+                <div class="col s4 center-align">
+                    <h4>Гравець <a
+                            href="/tournaments/{{nick}}/registration/{{tournament.tournamentId}}/{{opponent}}">{{opponent}}</a>
+                    </h4>
+                    <div class="btn-large" onclick="location.href = '/active/{{nick}}/winner/{{tournament.tournamentId}}/{{round}}/{{opponent}}'">Переміг</div>
+                </div>
+                <div class="col s2"></div>
+            </div>
+        {{/if}}
+    {{else}}
+        <h2 class="center-align">Нажаль, ви вже вибули з турніру <a
+                href="/tournaments/{{nick}}/show/{{tournament.tournamentId}}">{{tournament.name}}</a></h2>
+    {{/if}}
+</div>

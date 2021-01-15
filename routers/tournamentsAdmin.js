@@ -50,16 +50,16 @@ router.get('/show/:tournamentId', async (req, res) => {
 
     const didntStart = status === 'не почався'
     const timeToStart = didntStart ? countDaysBeforeTournament(tournament.date) : null
+    const canStart = timeToStart === '0 днів'
 
     res.render('oneTournamentAdmin', {
         title: `${tournament.name}`,
         tournament: tournament,
         players: players,
         status: status,
-        timeToStart: timeToStart
+        timeToStart: timeToStart,
+        canStart: canStart
     })
-
-
 })
 
 router.get('/delete/:tournamentId', async (req, res) => {

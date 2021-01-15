@@ -5,28 +5,6 @@ const {Op} = require('sequelize')
 
 class DeckAdapter {
     static async add(registrationId, name, cardClass, cards) {
-        // const decksCount = await Registration.count({
-        //     where: {
-        //         registrationId: registrationId
-        //     }
-        // })
-        //
-        // if (decksCount < 3) {
-        //     const deck = await Deck.create({
-        //         name: name,
-        //         class: cardClass,
-        //         registrationId: registrationId
-        //     })
-        //
-        //     for (const card of cards) {
-        //         Card.create({
-        //             deckId: deck.deckId,
-        //             name: card
-        //         })
-        //     }
-        // } else
-        //     throw new Error('Вже додано 3 колоди')
-
         const deck = await Deck.create({
             name: name,
             class: cardClass,

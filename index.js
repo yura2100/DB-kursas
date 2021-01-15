@@ -22,6 +22,9 @@ const tournamentsAdminRouter = require('./routers/tournamentsAdmin')
 const playerRouter = require('./routers/player')
 const tournamentsRouter = require('./routers/tournaments')
 const registerOnTournamentRouter = require('./routers/registerOnTournament')
+const statsRouter = require('./routers/stats')
+const activeTournamentsRouter = require('./routers/activeTournaments')
+const {checkTournamentStart} = require('./models/checkTournamentStart')
 
 const app = express()
 
@@ -42,14 +45,9 @@ app.use('/admin/tournaments', tournamentsAdminRouter)
 app.use('/', playerRouter)
 app.use('/tournaments', tournamentsRouter)
 app.use('/registerOnTournament', registerOnTournamentRouter)
-
-app.get('/aaa', async (req, res) => {
-    res.render('registrationOnTournament', {
-        title: 'Реєстрація на турнір',
-        decks: new Array(3).fill(0).map((value, index) => index + 1),
-    })
-})
+app.use('/stats', statsRouter)
+app.use('/active', activeTournamentsRouter)
 
 app.listen(3000, async () => {
-
+    checkTournamentStart()
 })

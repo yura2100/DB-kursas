@@ -7,22 +7,22 @@
         </div>
 
         <div class="input-field">
-            <input name="name" placeholder="Ім'я" id="name" type="text" class="validate" autocomplete="off" required value="{{player.name}}">
+            <input name="name" placeholder="Ім'я" id="name" type="text" class="validate" autocomplete="off" required value="{{player.name}}" pattern="\p{L}+">
             <label for="name">Ім'я</label>
         </div>
 
         <div class="input-field">
-            <input name="surname" placeholder="Прізвище" id="surname" type="text" class="validate" autocomplete="off" value="{{player.surname}}">
+            <input name="surname" placeholder="Прізвище" id="surname" type="text" class="validate" autocomplete="off" value="{{player.surname}}" pattern="\p{L}+">
             <label for="surname">Прізвище</label>
         </div>
 
         <div class="input-field">
-            <input name="country" placeholder="Країна" id="country" type="text" class="validate" autocomplete="off" value="{{player.country}}">
+            <input name="country" placeholder="Країна" id="country" type="text" class="validate" autocomplete="off" value="{{player.country}}" pattern="\p{L}+">
             <label for="country">Країна</label>
         </div>
 
         <div class="input-field">
-            <input name="city" placeholder="Місто" id="city" type="text" class="validate" autocomplete="off" value="{{player.city}}">
+            <input name="city" placeholder="Місто" id="city" type="text" class="validate" autocomplete="off" value="{{player.city}}" pattern="\p{L}+">
             <label for="city">Місто</label>
         </div>
 

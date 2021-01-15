@@ -3,10 +3,22 @@
         <div class="brand-logo"><a href="/player/show/{{nick}}">{{nick}}</a></div>
 
         <ul id="nav" class="right hide-on-med-and-down">
-            {{#if isTournament}}
-                <li class="active"><a href="/tournaments/{{nick}}">Турніри</a></li>
+            {{#if isActive}}
+                <li class="active"><a href="/active/{{nick}}">Активні турніри</a></li>
             {{else}}
-                <li><a href="/tournaments/{{nick}}">Турніри</a></li>
+                <li><a href="/active/{{nick}}">Активні турніри</a></li>
+            {{/if}}
+
+            {{#if isStats}}
+                <li class="active"><a href="/stats/{{nick}}">Цікаві турніри</a></li>
+            {{else}}
+                <li><a href="/stats/{{nick}}">Цікаві турніри</a></li>
+            {{/if}}
+
+            {{#if isTournament}}
+                <li class="active"><a href="/tournaments/{{nick}}">Усі турніри</a></li>
+            {{else}}
+                <li><a href="/tournaments/{{nick}}">Усі турніри</a></li>
             {{/if}}
 
             <li><a href="/">Вихід</a></li>

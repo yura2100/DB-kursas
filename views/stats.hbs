@@ -1,0 +1,91 @@
+<div class="container row">
+    <div class="col s6">
+        <h4 class="center-align">Топ 5 найближчих турнірів</h4>
+
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each tops.closestTournaments}}
+                <tr onclick="location.href='/tournaments/{{../nick}}/show/{{this.tournamentId}}'">
+                    <td>{{this.name}}</td>
+                    <td>{{this.date}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="col s6">
+        <h4 class="center-align">Топ 5 найгарячіших турнірів</h4>
+
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Кількість учасників</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each tops.hottestTournaments}}
+                <tr onclick="location.href='/tournaments/{{../nick}}/show/{{this.tournamentId}}'">
+                    <td>{{this.name}}</td>
+                    <td>{{this.count}}</td>
+                    <td>{{this.date}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container row">
+    <div class="col s6">
+        <h4 class="center-align">Топ 5 найпопулярніших турнірів</h4>
+
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Кількість учасників</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each tops.maxPlayers}}
+                <tr onclick="location.href='/tournaments/{{../nick}}/show/{{this.tournamentId}}'">
+                    <td>{{this.name}}</td>
+                    <td>{{this.count}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="col s6">
+        <h4 class="center-align">Топ 5 найменш популярніших турнірів</h4>
+
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Кількість учасників</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each tops.minPlayers}}
+                <tr onclick="location.href='/tournaments/{{../nick}}/show/{{this.tournamentId}}'">
+                    <td>{{this.name}}</td>
+                    <td>{{this.count}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -2,6 +2,7 @@ const {sequelize} = require('../../index')
 const {QueryTypes} = require('sequelize')
 const {Registration} = require('../tables/registration')
 const {DeckAdapter} = require('../tablesAdapters/deckAdapter')
+const {TournamentAdapter} = require('../tablesAdapters/tournamentAdapter')
 
 //decks - массив объектов, таких что name: string, class: string, cards: string[]
 class PlayerRelationsAdapter {
@@ -47,6 +48,55 @@ class PlayerRelationsAdapter {
             }
         )
     }
+
+    static async getPlayersActiveTournaments(nick) {
+        let allPlayersTournaments = await PlayerRelationsAdapter.getPlayersTournaments(nick)
+        const activeTournaments = []
+
+        for (const tournament of allPlayersTournaments) {
+            if (await TournamentAdapter.getStatus(tournament.tournamentId) === 'активний')
+                activeTournaments.push(tournament)
+        }
+
+        for (const tournament of activeTournaments) {
+            tournament.round = await TournamentAdapter.getMaxRound(tournament.tournamentId)
+        }
+
+        return activeTournaments
+    }
+
+    static async checkPlayerCanPlay(nick, tournamentId) {
+        const countLostRounds = await sequelize.query(
+            `SELECT COUNT(*) AS count
+            FROM rounds
+            WHERE tournamentId = ${tournamentId} 
+                AND (playerOne = '${nick}' OR playerTwo = '${nick}')
+                AND winner IS NOT NULL
+                AND winner != '${nick}'`, {
+                type: QueryTypes.SELECT,
+                raw: true
+            }
+        )
+
+        return countLostRounds[0].count === 0
+    }
+
+    static async checkResultExists(nick, tournamentId) {
+        const maxRound = await TournamentAdapter.getMaxRound(tournamentId)
+        const result = await sequelize.query(
+            `SELECT COUNT(*) AS count
+            FROM rounds
+            WHERE tournamentId = ${tournamentId}
+            AND number = ${maxRound}
+            AND winner = '${nick}'`, {
+                type: QueryTypes.SELECT,
+                raw: true
+            }
+        )
+
+        return result[0].count === 1
+    }
+
 }
 
 module.exports = {PlayerRelationsAdapter}

@@ -31,10 +31,10 @@ router.get('/add', async (req, res) => {
 })
 
 router.post('/add', async (req, res) => {
-    const {nick, name, surname} = req.body
+    const {nick, name, surname, password} = req.body
 
     try {
-        await PlayerAdapter.add(nick, name, surname)
+        await PlayerAdapter.add(nick, name, surname, password)
 
         res.redirect('/admin/players')
     } catch (e) {

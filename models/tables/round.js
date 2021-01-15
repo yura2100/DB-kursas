@@ -21,8 +21,7 @@ const Round = sequelize.define('round', {
         allowNull: false
     },
     playerTwo: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     },
     winner: {
         type: DataTypes.STRING

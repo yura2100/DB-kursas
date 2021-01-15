@@ -38,10 +38,10 @@ router.get('/player/add', async (req, res) => {
 })
 
 router.post('/player/add', async (req, res) => {
-    const {nick, name, surname} = req.body
+    const {nick, name, surname, password} = req.body
 
     try {
-        await PlayerAdapter.add(nick, name, surname)
+        await PlayerAdapter.add(nick, name, surname, password)
 
         res.redirect(`/player/show/${nick}`)
     } catch (e) {
@@ -102,7 +102,5 @@ router.get('/player/:nick/showOther/:nickRegistered', async (req, res) => {
         otherPlayer: otherPlayer
     })
 })
-
-
 
 module.exports = router
